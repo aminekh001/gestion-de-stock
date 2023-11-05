@@ -1,14 +1,9 @@
 package com.medAmine.gestion.de.stock.model;
 
 
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
+
 import java.util.List;
 
 
@@ -16,16 +11,23 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Builder
 @Entity
 @Table(name = "client")
 public class Client extends AbstracetEntity{
+
+    @Column(name="nom")
     private String nom;
+    @Column(name="prenom")
     private String prenom;
     @Embedded
     private Adresse adresse;
+    @Column(name="photo")
     private String photo;
-    private String mail;
 
+    @Column(name="mail")
+    private String mail;
+    @Column(name="numTel")
     private String numTel;
 
     @OneToMany(mappedBy ="client")
