@@ -5,16 +5,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.math.BigDecimal;
 
 
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Builder
+
 @Entity
 @Table(name = "ligneCommandeClient")
 public class LigneCommandeClient extends AbstracetEntity{
@@ -25,5 +25,10 @@ public class LigneCommandeClient extends AbstracetEntity{
     @ManyToOne
     @JoinColumn(name="idCommandeClient")
     private CommandeClient commandeClient;
+    private BigDecimal quantite;
+
+    private BigDecimal prixUnitaire;
+
+    private Integer idEntreprise;
 
 }

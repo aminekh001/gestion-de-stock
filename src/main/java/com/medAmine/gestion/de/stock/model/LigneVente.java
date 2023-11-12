@@ -2,18 +2,16 @@ package com.medAmine.gestion.de.stock.model;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Builder
+
 @Entity
 @Table(name = "ligneVente")
 public class LigneVente extends AbstracetEntity{
@@ -22,10 +20,12 @@ public class LigneVente extends AbstracetEntity{
     @JoinColumn(name="idVente")
     private Ventes vente;
 
+    private Article article;
     @Column(name="quntite")
-    private BigDecimal quntite;
+    private BigDecimal quantite;
     @Column(name="prixUnitaire")
     private BigDecimal prixUnitaire;
+    private Integer idEntreprise;
 
 
 }

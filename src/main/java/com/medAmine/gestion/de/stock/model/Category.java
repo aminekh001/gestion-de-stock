@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Builder
+
 @Entity
 @Table(name = "category")
 public class Category extends AbstracetEntity{

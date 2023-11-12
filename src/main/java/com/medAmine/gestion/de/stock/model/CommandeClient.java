@@ -2,19 +2,17 @@ package com.medAmine.gestion.de.stock.model;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.Instant;
 import java.util.List;
 
 
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Builder
+
 @Entity
 @Table(name = "commandeClient")
 public class CommandeClient extends AbstracetEntity{
@@ -25,6 +23,9 @@ public class CommandeClient extends AbstracetEntity{
     @ManyToOne
     @JoinColumn(name="idClient")
     private Client client;
+    @Enumerated(EnumType.STRING)
+    private EtatCommande etatCommande;
+    private Integer idEntreprise;
 
     @OneToMany(mappedBy = "commandeClient")
     private List<LigneCommandeClient> ligneCommandeClients;

@@ -2,17 +2,16 @@ package com.medAmine.gestion.de.stock.model;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import java.util.List;
 
 
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Builder
+
 @Entity
 @Table(name = "fournisser")
 public class Fournisser extends AbstracetEntity{
@@ -22,6 +21,7 @@ public class Fournisser extends AbstracetEntity{
     private String prenom;
     @Embedded
     private Adresse adresse;
+    private Integer idEntreprise;
     @Column(name="photo")
     private String photo;
     @Column(name="mail")

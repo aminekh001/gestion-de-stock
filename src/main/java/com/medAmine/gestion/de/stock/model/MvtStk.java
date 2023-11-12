@@ -11,7 +11,6 @@ import java.time.Instant;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Builder
 @Entity
 @Table(name = "mvtstk")
 public class MvtStk extends AbstracetEntity{
@@ -20,9 +19,14 @@ public class MvtStk extends AbstracetEntity{
     private Article article;
     @Column(name="dateMvt")
     private Instant dateMvt;
-    @Column(name="qantites")
-    private BigDecimal quantites;
-    @Column(name="typeMvStk")
+    @Column(name="qantite")
+    private BigDecimal quantite;
+    @Column(name="typeMvt")
+    @Enumerated(EnumType.STRING)
     private TypeMvtstk typeMvtstk;
+    @Column(name = "sourcemvt")
+    @Enumerated(EnumType.STRING)
+    private SourceMvtStk sourceMvt;
+    private Integer idEntreprise;
 
 }

@@ -3,19 +3,18 @@ package com.medAmine.gestion.de.stock.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.Instant;
+import java.util.List;
 
 
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Builder
 @Entity
 @Table(name = "ventes")
 public class Ventes extends AbstracetEntity{
@@ -25,6 +24,11 @@ public class Ventes extends AbstracetEntity{
     private Instant dateVente;
     @Column(name="commentaire")
     private String commentaire;
+    @Column(name = "identreprise")
+    private Integer idEntreprise;
+
+    @OneToMany(mappedBy = "vente")
+    private List<LigneVente> ligneVentes;
 
 
 }

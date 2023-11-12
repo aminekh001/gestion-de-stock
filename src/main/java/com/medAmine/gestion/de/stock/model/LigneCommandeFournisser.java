@@ -1,19 +1,16 @@
 package com.medAmine.gestion.de.stock.model;
-
-
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import java.util.List;
+import java.math.BigDecimal;
 
 
+
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Builder
+
 @Entity
 @Table(name = "ligneCommandeFourisser")
 public class LigneCommandeFournisser extends AbstracetEntity{
@@ -25,6 +22,12 @@ public class LigneCommandeFournisser extends AbstracetEntity{
     @ManyToOne
     @JoinColumn(name="idcommandeFournisser")
     private CommandeFournisser commandeFournisser;
+
+    private BigDecimal quantite;
+
+    private BigDecimal prixUnitaire;
+
+    private Integer idEntreprise;
 
 }
 

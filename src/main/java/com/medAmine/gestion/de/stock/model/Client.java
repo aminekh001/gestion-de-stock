@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Builder
+
 @Entity
 @Table(name = "client")
 public class Client extends AbstracetEntity{
@@ -29,6 +29,8 @@ public class Client extends AbstracetEntity{
     private String mail;
     @Column(name="numTel")
     private String numTel;
+    @Column(name = "identreprise")
+    private Integer idEntreprise;
 
     @OneToMany(mappedBy ="client")
     private List <CommandeClient> commandeClientList;
