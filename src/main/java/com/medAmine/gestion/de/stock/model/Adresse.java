@@ -1,6 +1,4 @@
 package com.medAmine.gestion.de.stock.model;
-
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
@@ -10,7 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-
 @Embeddable
 public class Adresse {
     @Column(name="adresse1")
