@@ -1,13 +1,10 @@
 package com.medAmine.gestion.de.stock.validator;
-
 import com.medAmine.gestion.de.stock.dto.ArticleDto;
 import org.springframework.util.StringUtils;
-
 import java.util.ArrayList;
 import java.util.List;
-
 public class ArticleValidator {
-    public List<String> Validate(ArticleDto articleDto) {
+    public static List<String> Validate(ArticleDto articleDto) {
     List<String> errors = new ArrayList<>();
             if(articleDto==null){
                 errors.add("Veuillez renseigner le code de l'article");
