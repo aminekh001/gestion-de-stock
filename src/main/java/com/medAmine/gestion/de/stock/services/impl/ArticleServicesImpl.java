@@ -1,5 +1,4 @@
 package com.medAmine.gestion.de.stock.services.impl;
-
 import com.medAmine.gestion.de.stock.Repo.ArticleRepo;
 import com.medAmine.gestion.de.stock.dto.ArticleDto;
 import com.medAmine.gestion.de.stock.exeption.EntityNotFoundException;
@@ -12,11 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 @Service
 @Slf4j
 public class ArticleServicesImpl implements ArticleServices {
@@ -37,7 +34,6 @@ public class ArticleServicesImpl implements ArticleServices {
         }
         return ArticleDto.fromEntity(articleRepo.save(ArticleDto.toEntity(articleDto)));
     }
-
     @Override
     public ArticleDto findById(Long id) {
         if (id==null){
@@ -49,16 +45,16 @@ public class ArticleServicesImpl implements ArticleServices {
         return Optional.of(ArticleDto.fromEntity(article.get())).orElseThrow(()->
                 new EntityNotFoundException("aucun article avec l'ID "+ id +"n'ete trouve dans la base de donné",ErrorCode.ARTICLE_NOT_FOUND));
     }
-
     @Override
     public ArticleDto findByCode(String code) {
-        if (!StringUtils.hasLength(code)){
+        if (StringUtils.hasLength(code)) {
+            Optional<Article> article = articleRepo.findByCode(code);
+            return Optional.of(ArticleDto.fromEntity(article.get())).orElseThrow(() ->
+                    new EntityNotFoundException("aucun article le code " + code + "n'ete trouve dans la base de donne  ", ErrorCode.ARTICLE_NOT_FOUND));
+        } else {
             log.error("article code is null");
             return null;
         }
-        Optional<Article> article=articleRepo.findByCode(code);
-        return Optional.of(ArticleDto.fromEntity(article.get())).orElseThrow(()->
-                new EntityNotFoundException("aucun article le code "+code+"n'ete trouve dans la base de donne  ",ErrorCode.ARTICLE_NOT_FOUND));
 
     }
 
@@ -69,7 +65,7 @@ public class ArticleServicesImpl implements ArticleServices {
     }
 
     @Override
-    public Void deleteById(Long id) {
-        return null;
+    public void deleteById(Long id) {
+        articleRepo.deleteById(id);
     }
 }

@@ -9,4 +9,6 @@ import java.util.Optional;
 @Repository
 public interface ArticleRepo extends JpaRepository< Article,Long> {
     Optional<Article> findByCode(String code);
+
+    void deleteById(Long id);
 }
