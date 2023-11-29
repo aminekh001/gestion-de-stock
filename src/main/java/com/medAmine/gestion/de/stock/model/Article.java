@@ -16,8 +16,8 @@ import java.math.BigDecimal;
 @Table(name = "article")
 public class Article extends AbstracetEntity {
 
-    @Column(name="CodeArticl")
-    private String CodeArticle;
+    @Column(name="codeArticle")
+    private String codeArticle;
     @Column(name="designation")
     private String designation;
     @Column(name="prixunitareHt")

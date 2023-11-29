@@ -46,13 +46,14 @@ public class ArticleServicesImpl implements ArticleServices {
                 new EntityNotFoundException("aucun article avec l'ID "+ id +"n'ete trouve dans la base de donné",ErrorCode.ARTICLE_NOT_FOUND));
     }
     @Override
-    public ArticleDto findByCode(String code) {
+    public ArticleDto findByCodeArticle(String code) {
         if (StringUtils.hasLength(code)) {
-            Optional<Article> article = articleRepo.findByCode(code);
+            Optional<Article> article = articleRepo.findByCodeArticle(code);
             return Optional.of(ArticleDto.fromEntity(article.get())).orElseThrow(() ->
                     new EntityNotFoundException("aucun article le code " + code + "n'ete trouve dans la base de donne  ", ErrorCode.ARTICLE_NOT_FOUND));
         } else {
             log.error("article code is null");
+
             return null;
         }
 
@@ -61,7 +62,10 @@ public class ArticleServicesImpl implements ArticleServices {
     @Override
     public List<ArticleDto> findAll() {
 
-        return articleRepo.findAll().stream().map(ArticleDto::fromEntity).collect(Collectors.toList());
+        return articleRepo.findAll().stream()
+                .map(ArticleDto::fromEntity)
+                .collect(Collectors.toList())
+                ;
     }
 
     @Override

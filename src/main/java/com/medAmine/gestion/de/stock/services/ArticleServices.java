@@ -7,7 +7,7 @@ import java.util.List;
 public interface ArticleServices {
     ArticleDto save(ArticleDto articleDto);
     ArticleDto findById(Long id);
-    ArticleDto findByCode(String code);
+    ArticleDto findByCodeArticle(String code);
     List<ArticleDto> findAll();
     void deleteById(Long id);
 }

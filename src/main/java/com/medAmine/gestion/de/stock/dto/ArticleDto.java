@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 public class ArticleDto {
     private Long id;
 
+
     private String CodeArticle;
 
     private String designation;
