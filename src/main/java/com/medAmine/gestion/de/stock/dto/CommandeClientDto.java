@@ -23,7 +23,7 @@ public class CommandeClientDto {
     private Integer idEntreprise;
     private List<LigneCommandeClientDto> ligneCommandeClients;
 
-    public CommandeClientDto fromEntity(CommandeClient commandeClient){
+    public static CommandeClientDto fromEntity(CommandeClient commandeClient){
         if(commandeClient==null){
             //expt to do
             return null;
