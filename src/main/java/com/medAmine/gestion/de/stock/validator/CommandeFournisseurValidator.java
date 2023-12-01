@@ -6,6 +6,18 @@ import org.springframework.util.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
+
+// api consumed by multiple client
+// that's why I  did the validation in the backend
+
+
+
+
+
+
+
 public class CommandeFournisseurValidator {
     public static List<String> validate(CommandeFournisserDto dto) {
         List<String> errors = new ArrayList<>();

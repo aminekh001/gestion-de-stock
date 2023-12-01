@@ -7,6 +7,18 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
+
+
+
+// api consumed by multiple client
+// that's why I  did the validation in the backend
+
+
+
+
+
 public class MvtStkValidator {
     public static List<String> validate(MvtStkDto dto) {
         List<String> errors = new ArrayList<>();

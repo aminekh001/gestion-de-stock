@@ -7,6 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdresseValidator {
+
+
+
+
+    // api consumed by multiple client
+    // that's why I  did the validation in the backend
+
+
+
+
+
     public static List<String> validate(AdresseDto adresseDto){
         List<String> errors =new ArrayList<>();
 

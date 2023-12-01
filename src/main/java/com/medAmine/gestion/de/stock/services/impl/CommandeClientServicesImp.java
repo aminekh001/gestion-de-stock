@@ -1,5 +1,4 @@
 package com.medAmine.gestion.de.stock.services.impl;
-
 import com.medAmine.gestion.de.stock.Repo.ArticleRepo;
 import com.medAmine.gestion.de.stock.Repo.ClientRepo;
 import com.medAmine.gestion.de.stock.Repo.CommandeClientRepo;
@@ -16,7 +15,9 @@ import com.medAmine.gestion.de.stock.model.LigneCommandeClient;
 import com.medAmine.gestion.de.stock.services.CommandeClientServices;
 import com.medAmine.gestion.de.stock.validator.CommandeClientValidator;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -29,6 +30,7 @@ public class CommandeClientServicesImp implements CommandeClientServices {
     private final ArticleRepo articleRepo;
     private final LigneCommandeClientRepo ligneCommandeClientRepo;
 
+    @Autowired
     public CommandeClientServicesImp(CommandeClientRepo commandeClientRepo, ClientRepo clientRepo, ArticleRepo articleRepo, LigneCommandeClientRepo ligneCommandeClientRepo) {
         this.commandeClientRepo = commandeClientRepo;
         this.clientRepo = clientRepo;
@@ -43,6 +45,11 @@ public class CommandeClientServicesImp implements CommandeClientServices {
             log.error("command clientt n'est pas valide ",commandeClientDto);
             throw new InvalidEntityException("command clientt n'est pas valide", ErrorCode.COMMANDE_CLIENT_NOT_VALID,err);
         }
+
+
+
+
+
         Optional<Client> clientVerif= clientRepo.findById(commandeClientDto.getClient().getId());
 
         if (clientVerif.isEmpty()){
@@ -50,12 +57,21 @@ public class CommandeClientServicesImp implements CommandeClientServices {
             throw new EntityNotFoundException
                     ("Aucun client avec l'ID"+commandeClientDto.getClient().getId()+"n'a ete trouve dans la BDD",ErrorCode.CLIENT_NOT_FOUND);
         }
+
+
+
+
+
+
         List<String> articleErr= new ArrayList<>();
+
         if (commandeClientDto.getLigneCommandeClients()!=null){
             commandeClientDto.getLigneCommandeClients().forEach(ligneCommandeClient -> {
                 if (ligneCommandeClient.getArticle()!= null) {
+
                     Optional<Article> articleVerif = articleRepo.findById(ligneCommandeClient.getArticle().getId());
                     if (articleVerif.isEmpty()) {
+
                         articleErr.add("l'article avec l'id " + ligneCommandeClient.getArticle().getId() + "n'existe pas");
                     }
                 }else {
@@ -65,12 +81,21 @@ public class CommandeClientServicesImp implements CommandeClientServices {
                     );
 
         }
+
+
+
+
         if (!articleErr.isEmpty()){
             log.warn("Article n'existe pas ");
             throw new InvalidEntityException("Article n'existe pas dans la BDD",ErrorCode.ARTICLE_NOT_FOUND,articleErr);
         }
+
+
+
+
         CommandeClient saveCommandeClient= commandeClientRepo.save(CommandeClientDto.toEntity(commandeClientDto));
         if (commandeClientDto.getLigneCommandeClients()!=null){
+
             commandeClientDto.getLigneCommandeClients().forEach(ligneComClt -> {
                 LigneCommandeClient ligneCommandeClient1 = LigneCommandeClientDto.toEntity(ligneComClt);
                 ligneCommandeClient1.setCommandeClient(saveCommandeClient);
@@ -80,19 +105,30 @@ public class CommandeClientServicesImp implements CommandeClientServices {
         }
         return CommandeClientDto.fromEntity(saveCommandeClient);
     }
-
     @Override
     public CommandeClientDto findById(Long id) {
-        return null;
+        if(id==null){
+            log.error("id est null");
+            return null;
+        }
+        Optional<CommandeClient> cmdClt = commandeClientRepo.findById(id);
+        return Optional.of(CommandeClientDto.fromEntity(cmdClt.get()))
+                .orElseThrow(()->new EntityNotFoundException("aucun CommandeClient avec l'ID "+ id +"n'ete trouve dans la base de donné",ErrorCode.COMMANDE_CLIENT_NOT_FOUND));
     }
-
     @Override
     public CommandeClientDto findByCode(String code) {
-        return null;
+        if (!StringUtils.hasLength(code)){
+            log.error("code est vide");
+            return null;
+        }
+        Optional<CommandeClient> cmdClT = commandeClientRepo.findByCode(code);
+        return Optional.of(CommandeClientDto.fromEntity(cmdClT.get()))
+                .orElseThrow(()->new EntityNotFoundException("aucun ClommandeClient avec le code "+ code +"n'ete trouve dans la base de donné",ErrorCode.COMMANDE_CLIENT_NOT_FOUND));
     }
 
     @Override
     public void deleteById(Long id) {
+        commandeClientRepo.deleteById(id);
 
     }
 }

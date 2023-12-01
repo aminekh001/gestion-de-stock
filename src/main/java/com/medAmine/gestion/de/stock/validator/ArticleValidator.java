@@ -3,6 +3,22 @@ import com.medAmine.gestion.de.stock.dto.ArticleDto;
 import org.springframework.util.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
+
+
+
+
+
+
+
+
+// api consumed by multiple client
+// that's why I  did the validation in the backend
+
+
+
+
+
+
 public class ArticleValidator {
     public static List<String> Validate(ArticleDto articleDto) {
     List<String> errors = new ArrayList<>();
