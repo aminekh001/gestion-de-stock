@@ -1,14 +1,14 @@
 package com.medAmine.gestion.de.stock.services;
 
-import com.medAmine.gestion.de.stock.dto.CatrgoryDto;
+import com.medAmine.gestion.de.stock.dto.CatergoryDto;
 import java.util.List;
 
 public interface CategoryServices  {
 
-    CatrgoryDto save(CatrgoryDto catrgoryDto);
-    CatrgoryDto findById(Long id);
-    CatrgoryDto findByCode(String code);
-    List<CatrgoryDto> findAll();
+    CatergoryDto save(CatergoryDto catergoryDto);
+    CatergoryDto findById(Long id);
+    CatergoryDto findByCode(String code);
+    List<CatergoryDto> findAll();
     void deleteById(Long id);
 
 }

@@ -23,7 +23,7 @@ public class ArticleDto {
 
     private String photo;
 
-    private CatrgoryDto category;
+    private CatergoryDto category;
 
 
     public static  ArticleDto  fromEntity (Article article){
@@ -37,7 +37,7 @@ public class ArticleDto {
                 .prixunitareHt(article.getPrixunitareHt())
                 .tauxTva(article.getTauxTva())
                 .photo(article.getPhoto())
-                .category(CatrgoryDto.fromEntity(article.getCategory()))
+                .category(CatergoryDto.fromEntity(article.getCategory()))
                 .build();
     }
     public static Article toEntity(ArticleDto articleDto){
@@ -51,7 +51,7 @@ public class ArticleDto {
             article.setPrixunitareHt(articleDto.getPrixunitareHt());
             article.setTauxTva(articleDto.getTauxTva());
             article.setPhoto(articleDto.getPhoto());
-            article.setCategory(CatrgoryDto.toEntity(articleDto.getCategory()));
+            article.setCategory(CatergoryDto.toEntity(articleDto.getCategory()));
             return article;
 
     }

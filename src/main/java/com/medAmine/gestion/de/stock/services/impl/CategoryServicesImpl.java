@@ -1,8 +1,7 @@
 package com.medAmine.gestion.de.stock.services.impl;
 
-import com.medAmine.gestion.de.stock.Repo.ArticleRepo;
 import com.medAmine.gestion.de.stock.Repo.CategoryRepo;
-import com.medAmine.gestion.de.stock.dto.CatrgoryDto;
+import com.medAmine.gestion.de.stock.dto.CatergoryDto;
 import com.medAmine.gestion.de.stock.exeption.EntityNotFoundException;
 import com.medAmine.gestion.de.stock.exeption.ErrorCode;
 import com.medAmine.gestion.de.stock.exeption.InvalidEntityException;
@@ -28,48 +27,48 @@ public class CategoryServicesImpl implements CategoryServices {
     }
 
     @Override
-    public CatrgoryDto save(CatrgoryDto catrgoryDto) {
-        List<String> errers= CategoryValidator.validate(catrgoryDto);
+    public CatergoryDto save(CatergoryDto catergoryDto) {
+        List<String> errers= CategoryValidator.validate(catergoryDto);
          if (errers.isEmpty()){
              log.error("Category n'est pas valide");
              throw new InvalidEntityException("category n'est pas valide", ErrorCode.CATEGORY_NOT_VALID);
          }else {
-             return CatrgoryDto.fromEntity(categoryRepo.save(catrgoryDto.toEntity(catrgoryDto)));
+             return CatergoryDto.fromEntity(categoryRepo.save(catergoryDto.toEntity(catergoryDto)));
          }
 
 
     }
 
     @Override
-    public CatrgoryDto findById(Long id) {
+    public CatergoryDto findById(Long id) {
         if (id==null){
             log.error("category id est null");
             return null;
         }
 
         Optional<Category> category = categoryRepo.findById(id);
-        return Optional.of(CatrgoryDto.fromEntity(category.get())).orElseThrow(()->
+        return Optional.of(CatergoryDto.fromEntity(category.get())).orElseThrow(()->
                 new EntityNotFoundException("aucun category avec l'ID "+ id +"n'ete trouve dans la base de donné",ErrorCode.CATEGORY_NOT_FOUND )) ;
     }
 
     @Override
-    public CatrgoryDto findByCode(String code) {
+    public CatergoryDto findByCode(String code) {
         if (!StringUtils.hasLength(code)){
             log.error("code est null ");
             return null;
         }
         Optional<Category> category = categoryRepo.findByCode(code);
 
-        return Optional.of(CatrgoryDto.fromEntity(category.get())).orElseThrow(()->
+        return Optional.of(CatergoryDto.fromEntity(category.get())).orElseThrow(()->
                 new EntityNotFoundException( "aucun Category avec le code "+ code +"n'est trouve dans la base de donne",ErrorCode.CATEGORY_NOT_FOUND)) ;
 
 
     }
 
     @Override
-    public List<CatrgoryDto> findAll() {
+    public List<CatergoryDto> findAll() {
 
-        return categoryRepo.findAll().stream().map(CatrgoryDto::fromEntity).collect(Collectors.toList());
+        return categoryRepo.findAll().stream().map(CatergoryDto::fromEntity).collect(Collectors.toList());
     }
 
     @Override

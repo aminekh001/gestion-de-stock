@@ -1,6 +1,6 @@
 package com.medAmine.gestion.de.stock.validator;
 
-import com.medAmine.gestion.de.stock.dto.CatrgoryDto;
+import com.medAmine.gestion.de.stock.dto.CatergoryDto;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import java.util.List;
 
 
 public class CategoryValidator {
-    public static List<String> validate(CatrgoryDto categoryDto) {
+    public static List<String> validate(CatergoryDto categoryDto) {
         List<String> errors = new ArrayList<>();
 
         if (categoryDto == null || !StringUtils.hasLength(categoryDto.getCode())) {
